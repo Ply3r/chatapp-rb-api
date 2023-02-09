@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_221208) do
   create_table "friends", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "sender_id"
     t.uuid "receiver_id"
-    t.boolean "status"
+    t.boolean "status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["receiver_id"], name: "index_friends_on_receiver_id"
@@ -39,8 +39,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_221208) do
     t.uuid "sender_id"
     t.uuid "receiver_id"
     t.string "content"
-    t.boolean "received"
-    t.boolean "readed"
+    t.boolean "received", default: false
+    t.boolean "readed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["receiver_id"], name: "index_messages_on_receiver_id"
@@ -51,7 +51,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_05_221208) do
     t.string "username"
     t.string "email"
     t.string "password_digest"
-    t.boolean "status"
+    t.boolean "status", default: false
     t.string "profile_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -4,7 +4,7 @@ class StartMigration < ActiveRecord::Migration[7.0]
       t.string :username
       t.string :email
       t.string :password_digest
-      t.boolean :status
+      t.boolean :status, :default => false
       t.string :profile_image
       t.timestamps
     end
@@ -12,7 +12,7 @@ class StartMigration < ActiveRecord::Migration[7.0]
     create_table :friends, id: :uuid do |t|
       t.uuid :sender_id
       t.uuid :receiver_id
-      t.boolean :status
+      t.boolean :status, :default => false
       t.timestamps
     end
 
@@ -20,8 +20,8 @@ class StartMigration < ActiveRecord::Migration[7.0]
       t.uuid :sender_id
       t.uuid :receiver_id
       t.string :content
-      t.boolean :received
-      t.boolean :readed
+      t.boolean :received, :default => false
+      t.boolean :readed, :default => false
       t.timestamps
     end
 

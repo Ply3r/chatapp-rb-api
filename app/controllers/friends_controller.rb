@@ -4,10 +4,10 @@ class FriendsController < ApplicationController
   def index
     if params[:search].present?
       friends = apply_scopes(Friend.all)
-        .joins('INNER JOIN users ON users.id = friends.sender_id OR users.id = friends.receiver_id')
         .where('(friends.sender_id = ? OR friends.receiver_id = ?) AND friends.status = true', @user.id, @user.id)
-        .where('users.username LIKE ? OR users.email LIKE ?', "%#{friend_params[:search]}%", "%#{friend_params[:search]}%")
         .where('users.id != ?', @user.id)
+        .where('users.username LIKE ? OR users.email LIKE ?', "%#{friend_params[:search]}%", "%#{friend_params[:search]}%")
+        .joins('INNER JOIN users ON users.id = friends.sender_id OR users.id = friends.receiver_id')
         .select('users.id, users.username, users.profile_image, friends.id AS friend_id, friends.status')
 
       friends = User.users_with_img(friends)
@@ -15,9 +15,9 @@ class FriendsController < ApplicationController
     end
 
     friends = Friend.all
-      .joins('INNER JOIN users ON users.id = friends.sender_id OR users.id = friends.receiver_id')
       .where('(friends.sender_id = ? OR friends.receiver_id = ?) AND friends.status = true', @user.id, @user.id)
       .where('users.id != ?', @user.id)
+      .joins('INNER JOIN users ON users.id = friends.sender_id OR users.id = friends.receiver_id')
       .select('users.id, users.username, users.profile_image, friends.id AS friend_id, friends.status')
 
     friends = User.users_with_img(friends)

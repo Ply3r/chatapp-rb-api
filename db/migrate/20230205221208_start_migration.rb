@@ -28,7 +28,7 @@ class StartMigration < ActiveRecord::Migration[7.0]
     create_table :chats, id: :uuid do |t|
       t.uuid :sender_id
       t.uuid :receiver_id
-      t.uuid :last_message_id
+      t.uuid :last_message_id, :default => nil
       t.timestamps
     end
 

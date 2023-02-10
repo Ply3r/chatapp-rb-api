@@ -20,4 +20,7 @@ Rails.application.routes.draw do
       patch :accept
     end
   end
+
+  resources :chats
+  resources :messages 
 end
